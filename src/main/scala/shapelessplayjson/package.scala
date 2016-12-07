@@ -12,8 +12,12 @@ package object shapelessplayjson {
     tWrites: Writes[T]
   ): Writes[FieldType[K, H] :: T] = {
     (hl: FieldType[K, H] :: T) => {
-      Json.obj(witness.value.name -> hWrites.value.writes(hl.head)) ++
-        tWrites.writes(hl.tail).asInstanceOf[JsObject]
+      tWrites.writes(hl.tail) match {
+        case tjso: JsObject =>
+          tjso + (witness.value.name -> hWrites.value.writes(hl.head))
+        case _ =>
+          throw new RuntimeException("tail serializer must return JsObject")
+      }
     }
   }
 
