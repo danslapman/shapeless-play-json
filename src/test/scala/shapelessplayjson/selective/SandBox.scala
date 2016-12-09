@@ -15,6 +15,7 @@ import Tupler._
 import Values._
 import ZipWithKeys._
 import syntax.std.function._
+import shapelessplayjson.strict._
 
 class SandBox extends FunSuite with Matchers {
   type RItem = Record.`'name -> String, 'q -> Int`.T
@@ -30,13 +31,11 @@ class SandBox extends FunSuite with Matchers {
 
   val cc = builder(Item.apply, unlift(Item.unapply))
 
-  def unapplyRecord[B <: HList : Values] = (b: B) => b.values
-
   def applyRecord(v1: String, v2: Int): RItem = ('name ->> v1) :: ('q ->> v2) :: HNil
 
   def applyRecordHL[B <: HList : Values : Keys](implicit
     withKeys: ZipWithKeys[Keys[B]#Out, Values[B]#Out]
-  ) = (v: Values[B]#Out) => v.zipWithKeys[Keys[B]#Out]
+  ) = (v: Values[B]#Out) => v.zipWithKeys
 
   //val applyRItem = applyRecordHL[RItem]
 

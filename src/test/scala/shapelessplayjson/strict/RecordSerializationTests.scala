@@ -13,12 +13,12 @@ class RecordSerializationTests extends FunSuite with Matchers {
   private type Book = Record.`'author -> String, 'title -> String, 'id -> Int, 'price -> Double`.T
 
   private val bookFormat =
-    (__ \ "author").format[String] ~
-    (__ \ "title").format[String] ~
-    (__ \ "id").format[Int] ~
-    (__ \ "price").format[Double]
+    (__ \ "author").write[String] ~
+    (__ \ "title").write[String] ~
+    (__ \ "id").write[Int] ~
+    (__ \ "price").write[Double]
 
-  private implicit val bookWrites: Format[Book] = bookFormat(null, unapplyRecord[Book].andThen(_.tupled))
+  private implicit val bookWrites = bookFormat(unapplyRecord[Book].andThen(_.tupled))
 
   test("Serialize with strict schema") {
     val book =
