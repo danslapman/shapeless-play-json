@@ -1,10 +1,10 @@
-package shapelessplayjson
-
-import play.api.libs.json._
-import shapeless._
-import shapeless.record._
+package shapelessplayjson.auto
 
 import org.scalatest.{FunSuite, Matchers}
+import play.api.libs.json._
+import shapelessplayjson._
+import shapeless._
+import shapeless.record._
 
 class RecordDeserializationTests extends FunSuite with Matchers {
   test("Deserialize HNil") {

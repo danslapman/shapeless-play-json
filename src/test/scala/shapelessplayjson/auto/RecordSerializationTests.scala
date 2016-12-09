@@ -1,6 +1,7 @@
-package shapelessplayjson
+package shapelessplayjson.auto
 
 import play.api.libs.json._
+import shapelessplayjson._
 import shapeless._
 import shapeless.syntax.singleton._
 //import shapeless.record._
