@@ -9,6 +9,7 @@ import shapeless._
 import shapeless.record._
 import shapeless.syntax.singleton._
 import shapelessplayjson._
+import shapelessplayjson.auto._
 
 val book =
     ('author ->> "Benjamin Pierce") ::
