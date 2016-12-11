@@ -1,4 +1,4 @@
-package shapelessplayjson.strict
+package shapelessplayjson.functional
 
 import org.scalatest.{FunSuite, Matchers}
 import play.api.libs.json._
@@ -20,7 +20,7 @@ class RecordSerializationTests extends FunSuite with Matchers {
 
   private implicit val bookWrites = bookFormat(unapplyRecord[Book].andThen(_.tupled))
 
-  test("Serialize with strict schema") {
+  test("Serialize with functional builder") {
     val book =
       ('author ->> "Benjamin Pierce") ::
       ('title  ->> "Types and Programming Languages") ::

@@ -3,9 +3,6 @@ package shapelessplayjson.strict
 import org.scalatest.{FunSuite, Matchers}
 import play.api.libs.json._
 import shapeless._
-import shapeless.labelled._
-import shapeless.record._
-import shapeless.ops.record.MapValues._
 import shapeless.syntax.singleton._
 import shapelessplayjson.recordops.ZipByKey._
 
