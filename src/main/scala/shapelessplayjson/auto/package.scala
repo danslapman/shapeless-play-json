@@ -8,15 +8,10 @@ package object auto {
   implicit def recordWrites[K <: Symbol, H, T <: HList](implicit
     witness: Witness.Aux[K],
     hWrites: Lazy[Writes[H]],
-    tWrites: Writes[T]
-  ): Writes[FieldType[K, H] :: T] = {
+    tWrites: OWrites[T]
+  ): OWrites[FieldType[K, H] :: T] = {
     (hl: FieldType[K, H] :: T) => {
-      tWrites.writes(hl.tail) match {
-        case tjso: JsObject =>
-          tjso + (witness.value.name -> hWrites.value.writes(hl.head))
-        case _ =>
-          throw new RuntimeException("tail serializer must return JsObject")
-      }
+      tWrites.writes(hl.tail) + (witness.value.name -> hWrites.value.writes(hl.head))
     }
   }
 

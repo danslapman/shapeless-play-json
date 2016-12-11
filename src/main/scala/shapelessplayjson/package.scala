@@ -1,9 +1,8 @@
 import play.api.libs.json._
 import shapeless._
-import shapeless.labelled._
 
 package object shapelessplayjson {
-  implicit val hNilWrites: Writes[HNil] =
+  implicit val hNilWrites: OWrites[HNil] =
     (_: HNil) => Json.obj()
 
   implicit val hNilReads: Reads[HNil] = {
