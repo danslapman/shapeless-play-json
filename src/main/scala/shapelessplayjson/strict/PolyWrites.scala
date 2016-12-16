@@ -1,9 +1,9 @@
 package shapelessplayjson.strict
 
-import play.api.libs.json.{JsObject, JsPath, Json, OWrites}
-import shapeless.{HList, Poly1}
+import play.api.libs.json.{JsObject, Json, OWrites}
 import shapeless.labelled.FieldType
 import shapeless.ops.hlist.MapFolder
+import shapeless.{HList, Poly1}
 
 trait PolyWrites extends Poly1 {
   def write[K, V](ov: OWrites[V]) = at[FieldType[K, V]](ov.writes)
