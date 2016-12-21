@@ -3,15 +3,16 @@ package shapelessplayjson.strict
 import play.api.libs.json._
 import shapeless._
 import shapeless.syntax.singleton._
-import shapeless.ops.hlist.RightFolder
-import RightFolder._
 import shapelessplayjson.hNilReads
-
+import shapeless.ops.hlist.RightFolder._
 import org.scalatest.{FunSuite, Matchers}
+import shapeless.record.Record
 
 import scala.language.higherKinds
 
 class RecordDeserializationTests extends FunSuite with Matchers {
+
+  type Book = Record.`'author -> String, 'title -> String, 'id -> Long, 'price -> Double`.T
 
   val jso = Json.obj(
     "author" -> JsString("Benjamin Pierce"),
@@ -23,14 +24,15 @@ class RecordDeserializationTests extends FunSuite with Matchers {
   val schema =
     ('author ->> (__ \ 'author).read[String]) ::
     ('title ->> (__ \ 'title).read[String]) ::
-    ('id ->> (__ \ 'id).read[Int]) ::
+    ('id ->> (__ \ 'id).read[Long]) ::
     ('price ->> (__ \ 'price).read[Double]) ::
     HNil
 
-  val reader = schema.map(SchemaConverter).foldRight(hNilReads.reads _)(ReadsComposer)
+  implicit val bookReads: Reads[Book] =
+    (json: JsValue) => (schema.map(SchemaConverter).foldRight(hNilReads.reads _)(ReadsComposer) _) (json)
 
   test("Deserialize record") {
-    val result = reader(jso)
+    val result = jso.validate[Book]
     result shouldBe 'success
     val book = result.get
 
