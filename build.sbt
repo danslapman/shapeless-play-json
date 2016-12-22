@@ -10,7 +10,7 @@ scalacOptions += "-Xexperimental"
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.2",
-  "com.typesafe.play" %% "play-json" % "2.5.10",
+  "com.typesafe.play" %% "play-json" % "2.6.0-M1",
   "org.scalatest" %% "scalatest" % "3.0.1" % Test
 )
 
