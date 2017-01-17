@@ -28,8 +28,9 @@ class RecordDeserializationTests extends FunSuite with Matchers {
     ('price ->> (__ \ 'price).read[Double]) ::
     HNil
 
-  implicit val bookReads: Reads[Book] =
-    (json: JsValue) => (schema.map(SchemaConverter).foldRight(hNilReads.reads _)(ReadsComposer) _) (json)
+  val codec = schema.map(SchemaConverter).foldRight(hNilReads.reads(_))(ReadsComposer)
+
+  implicit val bookReads: Reads[Book] = (json: JsValue) => codec(json)
 
   test("Deserialize record") {
     val result = jso.validate[Book]
