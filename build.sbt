@@ -2,15 +2,14 @@ name := "shapeless-play-json"
 
 version := "0.2-SNAPSHOT"
 
-scalaVersion := Versions.scala
+scalaVersion := "2.11.8"
 
-lazy val extraScalacOptions: Seq[String] =
-  CrossVersion.partialVersion(Versions.scala) match {
+scalacOptions ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, y)) if y == 11 => Seq("-Xexperimental")
-    case _ => Seq()
+    case _ => Seq.empty[String]
   }
-
-scalacOptions ++= extraScalacOptions
+}
 
 libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.2",
