@@ -7,6 +7,7 @@ scalaVersion := "2.11.8"
 scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, y)) if y == 11 => Seq("-Xexperimental")
+    case Some((2, y)) if y == 12 => Seq("-Yrecursion", "1")
     case _ => Seq.empty[String]
   }
 }
