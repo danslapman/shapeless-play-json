@@ -14,8 +14,8 @@ scalacOptions ++= {
 
 libraryDependencies += {
   CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, y)) if y == 12 => "com.typesafe.play" %% "play-json" % "2.6.0-M1"
-    case _ => "com.typesafe.play" %% "play-json" % "2.5.10"
+    case Some((2, y)) if y == 12 => "com.typesafe.play" %% "play-json" % "2.6.0-M6"
+    case _ => "com.typesafe.play" %% "play-json" % "2.5.13"
   }
 }
 
