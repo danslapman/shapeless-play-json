@@ -2,7 +2,9 @@ name := "shapeless-play-json"
 
 version := "0.2-SNAPSHOT"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.2"
+
+crossScalaVersions := Seq("2.11.11", "2.12.2")
 
 scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
@@ -12,14 +14,8 @@ scalacOptions ++= {
   }
 }
 
-libraryDependencies += {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, y)) if y == 12 => "com.typesafe.play" %% "play-json" % "2.6.0-M6"
-    case _ => "com.typesafe.play" %% "play-json" % "2.5.13"
-  }
-}
-
 libraryDependencies ++= Seq(
+  "com.typesafe.play" %% "play-json" % "2.6.1",
   "com.chuusai" %% "shapeless" % "2.3.2",
   "org.scalatest" %% "scalatest" % "3.0.1" % Test
 )
