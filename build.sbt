@@ -4,11 +4,12 @@ version := "0.2-SNAPSHOT"
 
 scalaVersion := "2.12.4"
 
-crossScalaVersions := Seq("2.11.12", "2.12.4")
+crossScalaVersions := Seq("2.11.12", "2.12.4", "2.13.0-M1")
 
 scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, y)) if y == 11 => Seq("-Xexperimental")
+    case Some((2, y)) if y == 13 => Seq("-Yrecursion", "1")
     case _ => Seq.empty[String]
   }
 }
@@ -16,7 +17,7 @@ scalacOptions ++= {
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.6.7",
   "com.chuusai" %% "shapeless" % "2.3.2",
-  "org.scalatest" %% "scalatest" % "3.0.4" % Test
+  "org.scalatest" %% "scalatest" % "3.0.3" % Test
 )
 
 lazy val shapeless_play_json = project in file(".")
