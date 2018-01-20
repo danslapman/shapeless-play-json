@@ -1,4 +1,4 @@
-shapeless-play-json [![Release](https://jitpack.io/v/danslapman/shapeless-play-json.svg)](https://jitpack.io/#danslapman/shapeless-play-json)
+shapeless-play-json [ ![Download](https://api.bintray.com/packages/danslapman/maven/shapeless-play-json/images/download.svg) ](https://bintray.com/danslapman/maven/shapeless-play-json/_latestVersion)
 =========
 
 **shapeless-play-json** provides JSON (un)marshalling support for [shapeless](https://github.com/milessabin/shapeless)'s extensible records via play-json.
@@ -27,9 +27,9 @@ val book =
   println(deserializedBook)
 ```
 
-shapeless-play-json is available via jitpack:
+shapeless-play-json is available via bintray:
 ```
-    resolvers += "jitpack" at "https://jitpack.io"
+    resolvers += Resolver.bintrayRepo("danslapman", "maven")
 
-    libraryDependencies += "com.github.danslapman" %% "shapeless-play-json" % "{version}"
+    libraryDependencies += "danslapman" %% "shapeless-play-json" % "{version}"
 ```

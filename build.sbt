@@ -1,6 +1,6 @@
 name := "shapeless-play-json"
 
-version := "0.7-SNAPSHOT"
+version := "0.7"
 
 scalaVersion := "2.12.4"
 
@@ -21,3 +21,9 @@ libraryDependencies ++= Seq(
 )
 
 lazy val shapeless_play_json = project in file(".")
+
+licenses += ("WTFPL", url("http://www.wtfpl.net"))
+
+bintrayOrganization := Some("danslapman")
+
+bintrayReleaseOnPublish in ThisBuild := false
